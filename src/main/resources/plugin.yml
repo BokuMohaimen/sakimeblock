@@ -1,0 +1,4 @@
+name: Sakimeblock
+version: @version@
+main: mohaimen.sakimeblock.sakimeblock.Sakimeblock
+api-version: 1.16
