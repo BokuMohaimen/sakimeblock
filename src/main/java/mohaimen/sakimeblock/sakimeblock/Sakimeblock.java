@@ -23,6 +23,9 @@ public final class Sakimeblock extends JavaPlugin implements Listener {
     }
     @EventHandler
     public void onChat(PlayerChatEvent event) {
-
+        if (event.getMessage().indexOf("sakime") == -1) {
+            event.getPlayer().kickPlayer("ええかげんにせえよほんま");
+            return;
+        }
     }
 }
