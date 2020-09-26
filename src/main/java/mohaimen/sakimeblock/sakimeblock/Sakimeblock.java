@@ -1,8 +1,11 @@
 package mohaimen.sakimeblock.sakimeblock;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,10 +25,24 @@ public final class Sakimeblock extends JavaPlugin implements Listener {
         getLogger().info("sakimeブロッガーを停止しました(:3っ[布団] ﾖｲｼｮ");
     }
     @EventHandler
-    public void onChat(PlayerChatEvent event) {
-        if (event.getMessage().indexOf("sakime") == -1) {
-            event.getPlayer().kickPlayer("ええかげんにせえよほんま");
+    public void onChat(AsyncPlayerChatEvent event) {
+        if (event.getMessage().indexOf("sakime") != -1) {
+            event.setCancelled(true);
+            kick(event.getPlayer());
             return;
         }
+        if (event.getMessage().indexOf("さきめ") != -1) {
+            event.setCancelled(true);
+            kick(event.getPlayer());
+            return;
+        }
+    }
+
+    public void kick(Player p) {
+        Bukkit.getScheduler().runTask(this, new Runnable() {
+            public void run() {
+                p.kickPlayer("Mohaimen_ksr: "+ ChatColor.RED+"ええかげんにせえよほんま(ｶﾞﾁｷﾞﾚ)");
+            }
+        });
     }
 }
